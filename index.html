@@ -19,22 +19,33 @@
         animation: spin 1s linear infinite;
         margin: 20px auto;
       }
-
       @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
     </style>
     <script>
-      // Espera 3 segundos y redirige
-      setTimeout(function () {
-        window.location.href = "https://api.whatsapp.com/send?phone=5491127412158&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n";
-      }, 3000);
+      const phone = localStorage.getItem("phone");
+      const message = localStorage.getItem("message");
+
+      if (phone && message) {
+        setTimeout(() => {
+          const encodedMessage = encodeURIComponent(message);
+          window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+        }, 3000);
+      } else {
+        document.addEventListener("DOMContentLoaded", () => {
+          document.getElementById("warning").style.display = "block";
+        });
+      }
     </script>
   </head>
   <body>
     <h2>Espere un momento...</h2>
     <p>Estamos redirigiéndolo a nuestro WhatsApp.</p>
     <div class="loader"></div>
+    <p id="warning" style="display:none; color: red; margin-top: 20px;">
+      ⚠️ Aún no se configuró el número o mensaje. Ingresá a <a href="admin.html">admin.html</a> para hacerlo.
+    </p>
   </body>
 </html>
