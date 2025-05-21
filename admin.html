@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel de Control</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 40px;
+        text-align: center;
+      }
+      .panel {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #25d366;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .note {
+        margin-top: 15px;
+        font-size: 13px;
+        color: #555;
+      }
+    </style>
+    <script>
+      function guardarDatos() {
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
+
+        if (!phone || !message) {
+          alert("Por favor completá ambos campos.");
+          return;
+        }
+
+        localStorage.setItem("phone", phone);
+        localStorage.setItem("message", message);
+        alert("✅ Datos guardados. Ya podés probar la redirección desde index.html");
+      }
+
+      function cargarDatos() {
+        document.getElementById("phone").value = localStorage.getItem("phone") || "";
+        document.getElementById("message").value = localStorage.getItem("message") || "";
+      }
+
+      function borrarDatos() {
+        localStorage.removeItem("phone");
+        localStorage.removeItem("message");
+        alert("❌ Datos borrados.");
+        location.reload();
+      }
+
+      window.onload = cargarDatos;
+    </script>
+  </head>
+  <body>
+    <div class="panel">
+      <h2>Panel de Control</h2>
+      <input type="text" id="phone" placeholder="Número WhatsApp (ej: 5491123456789)" />
+      <input type="text" id="message" placeholder="Mensaje a enviar" />
+      <button onclick="guardarDatos()">Guardar</button>
+      <button onclick="borrarDatos()" style="background-color: #e74c3c;">Borrar datos</button>
+      <p class="note">⚠️ Estos datos se guardan solo en este navegador.</p>
+    </div>
+  </body>
+</html>
