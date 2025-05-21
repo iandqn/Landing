@@ -1,40 +1,84 @@
 <!DOCTYPE html>
-<html lang="s">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redireccionando...</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 100px;
-        background-color: #f7f7f7;
-      }
-      .loader {
-        border: 6px solid #f3f3f3;
-        border-top: 6px solid #25d366;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 20px auto;
-      }
-
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    </style>
-    <script>
-      // Espera 3 segundos y redirige
-      setTimeout(function () {
-        window.location.href = "https://api.whatsapp.com/send?phone=5491127412158&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n";
-      }, 3000);
-    </script>
-  </head>
-  <body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redireccionando a WhatsApp...</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e5f7e6;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 350px;
+      background: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 12px;
+      color: #128C7E; /* verde WhatsApp */
+    }
+    p {
+      margin: 0 0 20px;
+      font-size: 1rem;
+      color: #555;
+    }
+    .loader {
+      margin: 0 auto 30px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #25d366;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+    a.button {
+      display: inline-block;
+      padding: 12px 25px;
+      font-size: 1rem;
+      text-decoration: none;
+      background-color: #25d366;
+      color: white;
+      border-radius: 25px;
+      box-shadow: 0 5px 12px rgba(37, 211, 102, 0.5);
+      transition: background-color 0.3s ease;
+    }
+    a.button:hover {
+      background-color: #1ebe57;
+    }
+  </style>
+  <script>
+    // Redirige después de 3 segundos
+    setTimeout(function() {
+      window.location.href = "https://api.whatsapp.com/send?phone=5491127412158&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n";
+    }, 3000);
+  </script>
+</head>
+<body>
+  <div class="container">
     <h2>Espere un momento...</h2>
-    <p>Estamos redirigiéndolo a nuestro WhatsApp.</p>
+    <p>Lo estamos redirigiendo a nuestro WhatsApp</p>
     <div class="loader"></div>
-  </body>
+    <p>Si la redirección no funciona, puede hacer clic en el botón:</p>
+    <a href="https://api.whatsapp.com/send?phone=5491127412158&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="button">Abrir WhatsApp</a>
+  </div>
+</body>
 </html>
