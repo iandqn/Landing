@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redireccionando...</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 100px;
+        background-color: #f7f7f7;
+      }
+      .loader {
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid #25d366;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    <script>
+      // Espera 3 segundos y redirige
+      setTimeout(function () {
+        window.location.href = "https://walink.co/5491127098708";
+      }, 3000); // 3000 milisegundos = 3 segundos
+    </script>
+  </head>
+  <body>
+    <h2>Espere un momento...</h2>
+    <p>Estamos redirigiéndolo a nuestro WhatsApp.</p>
+    <div class="loader"></div>
+  </body>
+</html>
