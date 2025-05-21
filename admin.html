@@ -10,7 +10,7 @@
         padding: 40px;
         text-align: center;
       }
-      .panel {
+      .panel, .login-box {
         background-color: white;
         padding: 30px;
         border-radius: 10px;
@@ -42,23 +42,33 @@
       }
     </style>
     <script>
+      const PASSWORD = "fusion2024"; // Cambiá esta clave como quieras
+
+      function login() {
+        const pass = document.getElementById("password").value;
+        if (pass === PASSWORD) {
+          localStorage.setItem("adminAccess", "true");
+          location.reload();
+        } else {
+          alert("❌ Contraseña incorrecta");
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem("adminAccess");
+        location.reload();
+      }
+
       function guardarDatos() {
         const phone = document.getElementById("phone").value;
         const message = document.getElementById("message").value;
-
         if (!phone || !message) {
           alert("Por favor completá ambos campos.");
           return;
         }
-
         localStorage.setItem("phone", phone);
         localStorage.setItem("message", message);
-        alert("✅ Datos guardados. Ya podés probar la redirección desde index.html");
-      }
-
-      function cargarDatos() {
-        document.getElementById("phone").value = localStorage.getItem("phone") || "";
-        document.getElementById("message").value = localStorage.getItem("message") || "";
+        alert("✅ Datos guardados.");
       }
 
       function borrarDatos() {
@@ -68,17 +78,35 @@
         location.reload();
       }
 
-      window.onload = cargarDatos;
+      function cargarDatos() {
+        document.getElementById("phone").value = localStorage.getItem("phone") || "";
+        document.getElementById("message").value = localStorage.getItem("message") || "";
+      }
+
+      window.onload = function () {
+        const isLogged = localStorage.getItem("adminAccess") === "true";
+        document.getElementById("login-box").style.display = isLogged ? "none" : "block";
+        document.getElementById("panel").style.display = isLogged ? "block" : "none";
+        if (isLogged) cargarDatos();
+      };
     </script>
   </head>
   <body>
-    <div class="panel">
+    <div class="login-box" id="login-box">
+      <h2>Acceso restringido</h2>
+      <input type="password" id="password" placeholder="Contraseña de acceso" />
+      <button onclick="login()">Entrar</button>
+    </div>
+
+    <div class="panel" id="panel" style="display: none;">
       <h2>Panel de Control</h2>
       <input type="text" id="phone" placeholder="Número WhatsApp (ej: 5491123456789)" />
       <input type="text" id="message" placeholder="Mensaje a enviar" />
       <button onclick="guardarDatos()">Guardar</button>
       <button onclick="borrarDatos()" style="background-color: #e74c3c;">Borrar datos</button>
+      <button onclick="logout()" style="background-color: #888;">Cerrar sesión</button>
       <p class="note">⚠️ Estos datos se guardan solo en este navegador.</p>
     </div>
   </body>
 </html>
+
