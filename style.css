@@ -72,6 +72,13 @@ body {
     color: #25d366;
     font-size: 24px;
     margin: 0 5px;
+    animation: pulse 1.5s infinite ease-in-out; /* Agrega animación */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .verification-section h2 {
