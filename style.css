@@ -1,0 +1,297 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    /* Alinea el contenido principal en la parte superior */
+    align-items: flex-start;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+    margin: 0;
+    background-color: #f0f2f5;
+    padding-top: 20px; /* Espacio superior para el contenido principal */
+    /* IMPORTANTE: Añade espacio en la parte inferior para que el contenido no quede debajo del footer fijo */
+    padding-bottom: 80px; /* Ajusta este valor si el footer es más alto/bajo */
+    position: relative; /* Necesario para los elementos con 'position: fixed' o 'absolute' */
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-sizing: border-box; /* Incluye el padding en el ancho */
+    /* No necesitamos margin-bottom aquí porque el padding del body ya lo gestiona */
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.whatsapp-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.header h1 {
+    color: #25d366;
+    font-size: 28px;
+    margin: 0;
+}
+
+.logo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    overflow: hidden; /* Asegura que el logo no se desborde */
+}
+
+.deepstore-logo {
+    width: 80px; /* Ajusta el tamaño si es necesario */
+    height: auto;
+}
+
+.verification-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.check-icon {
+    color: #25d366;
+    font-size: 24px;
+    margin: 0 5px;
+}
+
+.verification-section h2 {
+    color: #333333;
+    font-size: 22px;
+    margin: 0;
+}
+
+.subtitle {
+    color: #666666;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.connection-message {
+    background-color: #e7ffe8;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.connection-message p {
+    color: #25d366;
+    font-size: 16px;
+    margin: 0;
+}
+
+.whatsapp-button {
+    display: block; /* Para que ocupe todo el ancho disponible */
+    background-color: #25d366;
+    color: #ffffff;
+    font-size: 24px; /* Tamaño de fuente más grande */
+    font-weight: bold;
+    padding: 20px 0; /* Más padding para un botón más grande */
+    border-radius: 30px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* El botón ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye el padding en el ancho */
+}
+
+.whatsapp-button:hover {
+    background-color: #1ea04f;
+}
+
+.clients-winning {
+    background-color: #e0f7fa;
+    border-radius: 30px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    color: #00796b;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.people-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+/* Trustpilot Section - ESTILOS ACTUALIZADOS PARA PARECERSE MÁS A LA FOTO */
+.trustpilot-section {
+    background-color: #e6f7f3; /* Fondo verde claro */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column; /* Apila elementos verticalmente */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil */
+}
+
+.excellent-text {
+    color: #333333;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px; /* Espacio entre "Excelente" y la calificación */
+}
+
+.trustpilot-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    color: #666666;
+    font-size: 14px;
+}
+
+.trustpilot-rating .stars {
+    color: #00b67a; /* Color verde de las estrellas de Trustpilot */
+    margin-right: 8px;
+    font-size: 18px; /* Estrellas ligeramente más grandes */
+    white-space: nowrap; /* Mantiene las estrellas en una sola línea */
+}
+
+.trustpilot-rating .rating-value {
+    font-weight: bold;
+    color: #333333;
+    margin-right: 8px;
+    white-space: nowrap; /* Mantiene el valor de la calificación en una sola línea */
+}
+
+.trustpilot-rating .trustpilot-logo {
+    width: 90px; /* Ajusta el tamaño para que coincida con la imagen */
+    height: auto;
+}
+
+
+/* Notificación de Premios Pagados (inferior izquierda) */
+.paid-prizes-notification {
+    position: fixed; /* Posición fija relativa a la ventana */
+    bottom: 20px;
+    left: 20px;
+    background-color: #333333;
+    border-radius: 10px;
+    padding: 10px 15px; /* Padding más pequeño */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    max-width: 280px; /* Ancho máximo */
+    color: #ffffff;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    opacity: 0; /* Inicialmente oculto */
+    visibility: hidden; /* Oculto para lectores de pantalla cuando no visible */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transición suave */
+    z-index: 1001; /* Asegura que esté por encima de otros contenidos */
+}
+
+.paid-prizes-notification.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.paid-prizes-notification .notification-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.paid-prizes-notification .profile-picture {
+    width: 40px; /* Imagen de perfil más pequeña */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.paid-prizes-notification .text-content {
+    flex-grow: 1;
+}
+
+.paid-prizes-notification .name {
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+}
+
+.paid-prizes-notification .prize {
+    color: #ffd700; /* Color oro para "Premio PAGADOSS$" */
+    font-weight: bold;
+    margin: 3px 0; /* Margen reducido */
+    font-size: 15px; /* Ligeramente más grande para énfasis */
+}
+
+.paid-prizes-notification .prize .fa-gift {
+    margin-right: 5px;
+}
+
+.paid-prizes-notification .location {
+    color: #aaaaaa;
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    margin: 0;
+}
+
+/* FIXED FOOTER: "BONO ACTIVO" - NUEVO ESTILO */
+.active-bonus-fixed {
+    position: fixed; /* Posición fija en la ventana */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff4d4d; /* Fondo rojo */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 10px; /* Padding dentro de la barra */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra en el borde superior */
+    z-index: 1000; /* Asegura que esté por encima de otros contenidos */
+    box-sizing: border-box; /* Incluye el padding en el ancho */
+    text-align: center;
+}
+
+.active-bonus-fixed p {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+}
+
+.active-bonus-fixed .gift-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    animation: bounce 1s infinite; /* Pequeña animación de rebote */
+}
+
+/* Keyframes para la animación de rebote (opcional) */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
