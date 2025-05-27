@@ -119,6 +119,17 @@ body {
     background-color: #1ea04f;
 }
 
+.whatsapp-button .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-button:hover .arrow {
+    transform: translateX(5px); /* Mueve la flecha 5px a la derecha al pasar el mouse */
+}
+
+
 .clients-winning {
     background-color: #e0f7fa;
     border-radius: 30px;
