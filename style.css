@@ -136,6 +136,39 @@ body {
     transform: translateX(5px); /* Mueve la flecha 5px a la derecha al pasar el mouse */
 }
 
+.small-testimonials-section {
+    display: flex; /* Para que los testimonios puedan estar uno al lado del otro si hay espacio */
+    flex-wrap: wrap; /* Permite que los testimonios se envuelvan a la siguiente línea en pantallas pequeñas */
+    justify-content: center; /* Centra los testimonios */
+    gap: 15px; /* Espacio entre las "tarjetas" de testimonio */
+    margin-bottom: 30px; /* Espacio debajo de esta sección */
+    padding: 10px; /* Pequeño padding general para la sección */
+}
+
+.testimonial-card {
+    background-color: #f0f7f0; /* Un fondo muy suave, casi blanco-verdoso */
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 180px; /* Controla el ancho de cada tarjeta para que sean pequeñas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #444;
+    flex-grow: 1; /* Permite que crezcan para llenar el espacio disponible */
+}
+
+.testimonial-card p {
+    margin-bottom: 8px; /* Espacio entre el texto y el autor */
+    font-style: italic; /* Para que la frase se vea como una cita */
+    margin-top: 0;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: #25d366; /* Color verde para el nombre */
+    display: block; /* Para que el autor esté en su propia línea */
+}
 
 .clients-winning {
     background-color: #e0f7fa;
