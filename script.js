@@ -1,3 +1,14 @@
+// Nueva función para rastrear el clic en el botón de WhatsApp
+function trackWhatsAppClick() {
+    // Verifica que el Pixel de Meta esté cargado antes de enviar el evento
+    if (typeof fbq === 'function') {
+        fbq('track', 'Contact'); // Aquí puedes elegir 'Contact', 'Lead' o 'WhatsAppClick'
+        console.log('Evento de Pixel de Meta "Contact" enviado por clic en WhatsApp.');
+    } else {
+        console.warn('El Pixel de Meta no está cargado o fbq no está definido. El evento no se pudo enviar.');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Lógica para la Notificación de Premios Pagados (inferior izquierda)
     const notificationElement = document.getElementById('paidPrizeNotification');
@@ -60,18 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Iniciar el ciclo de notificaciones después de un pequeño retraso inicial
     setTimeout(showNotification, 2000); // Empezar después de 2 segundos
-    
-// Nueva función para rastrear el clic en el botón de WhatsApp
-function trackWhatsAppClick() {
-    // Verifica que el Pixel de Meta esté cargado antes de enviar el evento
-    if (typeof fbq === 'function') {
-        fbq('track', 'Contact'); // Aquí puedes elegir 'Contact', 'Lead' o 'WhatsAppClick'
-        console.log('Evento de Pixel de Meta "Contact" enviado por clic en WhatsApp.');
-    } else {
-        console.warn('El Pixel de Meta no está cargado o fbq no está definido. El evento no se pudo enviar.');
-    }
-}
-
 
     // Lógica para los Testimonios Rotatorios (en el medio de la página)
     const rotatingTestimonialElement = document.getElementById('rotatingTestimonial');
