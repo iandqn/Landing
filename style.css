@@ -136,38 +136,49 @@ body {
     transform: translateX(5px); /* Mueve la flecha 5px a la derecha al pasar el mouse */
 }
 
+/* ESTILOS PARA LA SECCIÓN DE TESTIMONIOS ROTATORIOS */
 .small-testimonials-section {
-    display: flex; /* Para que los testimonios puedan estar uno al lado del otro si hay espacio */
-    flex-wrap: wrap; /* Permite que los testimonios se envuelvan a la siguiente línea en pantallas pequeñas */
-    justify-content: center; /* Centra los testimonios */
-    gap: 15px; /* Espacio entre las "tarjetas" de testimonio */
+    display: flex;
+    justify-content: center; /* Centra la tarjeta */
     margin-bottom: 30px; /* Espacio debajo de esta sección */
-    padding: 10px; /* Pequeño padding general para la sección */
+    height: 90px; /* Dale una altura fija para que el diseño no "salte" al cambiar testimonios */
+    overflow: hidden; /* Asegura que el contenido que se oculta no se vea */
+    align-items: center; /* Centra verticalmente el contenido */
 }
 
 .testimonial-card {
     background-color: #f0f7f0; /* Un fondo muy suave, casi blanco-verdoso */
     border-radius: 10px;
     padding: 15px;
-    max-width: 180px; /* Controla el ancho de cada tarjeta para que sean pequeñas */
+    max-width: 250px; /* Ajusta este ancho para que sea más compacta */
+    width: 90%; /* Ancho responsivo */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     text-align: center;
     font-size: 14px;
     line-height: 1.4;
     color: #444;
-    flex-grow: 1; /* Permite que crezcan para llenar el espacio disponible */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+
+    opacity: 0; /* Inicialmente oculto */
+    visibility: hidden; /* Oculto de lectores de pantalla */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transición suave */
+}
+
+.testimonial-card.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .testimonial-card p {
-    margin-bottom: 8px; /* Espacio entre el texto y el autor */
-    font-style: italic; /* Para que la frase se vea como una cita */
+    margin-bottom: 8px;
+    font-style: italic;
     margin-top: 0;
 }
 
 .testimonial-author {
     font-weight: bold;
-    color: #25d366; /* Color verde para el nombre */
-    display: block; /* Para que el autor esté en su propia línea */
+    color: #25d366;
+    display: block;
 }
 
 .clients-winning {
