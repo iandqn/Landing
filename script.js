@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let currentTestimonialIndex = 0;
-    const testimonialDisplayDuration = 4000; // 6 segundos de visualización
+    const testimonialDisplayDuration = 2000; // 6 segundos de visualización
     const testimonialFadeDuration = 500; // 1 segundo para fade in/out
 
     function showNextTestimonial() {
