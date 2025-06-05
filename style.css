@@ -1,28 +1,28 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #1a2226; /* Un gris oscuro casi negro para el fondo */
     display: flex;
     justify-content: center;
-    /* Alinea el contenido principal en la parte superior */
-    align-items: flex-start;
-    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+    align-items: center;
+    min-height: 100vh;
     margin: 0;
-    background-color: #f0f2f5;
-    padding-top: 20px; /* Espacio superior para el contenido principal */
-    /* IMPORTANTE: Añade espacio en la parte inferior para que el contenido no quede debajo del footer fijo */
-    padding-bottom: 80px; /* Ajusta este valor si el footer es más alto/bajo */
-    position: relative; /* Necesario para los elementos con 'position: fixed' o 'absolute' */
+    color: #e0e0e0; /* Texto claro para contraste */
+    position: relative;
+    overflow-x: hidden;
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: #262e33; /* Un gris más claro que el fondo pero oscuro */
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px 20px;
-    width: 90%;
-    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra más oscura y profunda */
     text-align: center;
-    box-sizing: border-box; /* Incluye el padding en el ancho */
-    /* No necesitamos margin-bottom aquí porque el padding del body ya lo gestiona */
+    max-width: 400px;
+    width: 90%;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    border: 1px solid #3a4750; /* Borde sutil oscuro */
 }
 
 .header {
@@ -33,326 +33,430 @@ body {
 }
 
 .whatsapp-logo {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    width: 45px;
+    height: 45px;
+    margin-right: 12px;
+    filter: invert(1); /* Para que el logo de WhatsApp se vea blanco si es originalmente verde */
 }
 
 .header h1 {
-    color: #25d366;
-    font-size: 28px;
+    font-size: 2.2em;
+    color: #25d366; /* El verde clásico de WhatsApp para el título principal */
     margin: 0;
+    letter-spacing: 0.5px;
 }
 
 .logo-circle {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
+    background-color: #333d42; /* Un gris oscuro para el círculo */
     border-radius: 50%;
-    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 20px auto;
-    overflow: hidden; /* Asegura que el logo no se desborde */
+    margin: 0 auto 25px auto;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra interna más oscura */
 }
 
 .deepstore-logo {
-    width: 125px; /* Ajusta el tamaño si es necesario */
-    height: auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    filter: brightness(0.9) contrast(1.1); /* Ajuste sutil para logos oscuros en fondos oscuros */
 }
 
 .verification-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .check-icon {
-    color: #25d366;
-    font-size: 24px;
-    margin: 0 5px;
-    animation: pulse 1.5s infinite ease-in-out; /* Agrega animación */
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    color: #25d366; /* Verde de WhatsApp */
+    font-size: 1.6em;
+    margin: 0 8px;
 }
 
 .verification-section h2 {
-    color: #333333;
-    font-size: 22px;
+    font-size: 2em;
+    color: #f0f0f0; /* Blanco suave para el título */
     margin: 0;
+    font-weight: 700;
 }
 
 .subtitle {
-    color: #666666;
-    font-size: 18px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #a0a0a0; /* Gris medio para el subtítulo */
+    margin-bottom: 30px;
+    font-weight: 400;
 }
 
 .connection-message {
-    background-color: #e7ffe8;
+    background-color: #2d383f; /* Un gris-verdoso oscuro sutil */
+    border-left: 6px solid #128c7e; /* Un verde azulado oscuro para el borde */
+    padding: 18px;
+    margin-bottom: 35px;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .connection-message p {
-    color: #25d366;
-    font-size: 16px;
     margin: 0;
+    color: #b0e0d5; /* Verde claro para el texto del mensaje */
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 .whatsapp-button {
-    display: block; /* Para que ocupe todo el ancho disponible */
-    background-color: #25d366;
-    color: #ffffff;
-    font-size: 24px; /* Tamaño de fuente más grande */
+    display: inline-block;
+    background-color: #25d366; /* El verde clásico de WhatsApp */
+    color: white;
+    padding: 18px 35px;
+    border-radius: 35px;
+    font-size: 1.4em;
     font-weight: bold;
-    padding: 20px 0; /* Más padding para un botón más grande */
-    border-radius: 30px;
     text-decoration: none;
-    margin-bottom: 30px;
-    transition: background-color 0.3s ease;
-    width: 100%; /* El botón ocupa todo el ancho */
-    box-sizing: border-box; /* Incluye el padding en el ancho */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5); /* Sombra intensa del color del botón */
+    margin-bottom: 35px;
+    letter-spacing: 0.8px;
 }
 
 .whatsapp-button:hover {
-    background-color: #1ea04f;
+    background-color: #1ea754; /* Un verde un poco más oscuro al pasar el ratón */
+    transform: translateY(-3px);
 }
 
 .whatsapp-button .arrow {
-    display: inline-block;
-    margin-left: 10px;
-    transition: transform 0.3s ease-in-out;
+    margin-left: 12px;
+    font-size: 1.2em;
 }
 
-.whatsapp-button:hover .arrow {
-    transform: translateX(5px); /* Mueve la flecha 5px a la derecha al pasar el mouse */
-}
-
-/* ESTILOS PARA LA SECCIÓN DE TESTIMONIOS ROTATORIOS */
 .small-testimonials-section {
-    display: flex;
-    justify-content: center; /* Centra la tarjeta */
-    margin-bottom: 30px; /* Espacio debajo de esta sección */
-    height: 90px; /* Dale una altura fija para que el diseño no "salte" al cambiar testimonios */
-    overflow: hidden; /* Asegura que el contenido que se oculta no se vea */
-    align-items: center; /* Centra verticalmente el contenido */
+    margin-bottom: 35px;
+    min-height: 90px;
 }
 
 .testimonial-card {
-    background-color: #f0f7f0; /* Un fondo muy suave, casi blanco-verdoso */
-    border-radius: 10px;
-    padding: 15px;
-    max-width: 250px; /* Ajusta este ancho para que sea más compacta */
-    width: 90%; /* Ancho responsivo */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #444;
-    box-sizing: border-box; /* Incluye padding en el ancho */
-
-    opacity: 0; /* Inicialmente oculto */
-    visibility: hidden; /* Oculto de lectores de pantalla */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transición suave */
-}
-
-.testimonial-card.show {
-    opacity: 1;
-    visibility: visible;
+    background-color: #2d383f; /* Mismo gris-verdoso que el mensaje de conexión */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-style: italic;
+    color: #c0c0c0; /* Gris claro para el texto del testimonio */
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #4a5d6a; /* Borde sutil oscuro */
 }
 
 .testimonial-card p {
     margin-bottom: 8px;
-    font-style: italic;
-    margin-top: 0;
+    font-size: 1.15em;
+    line-height: 1.5;
 }
 
 .testimonial-author {
     font-weight: bold;
-    color: #25d366;
-    display: block;
+    color: #e0e0e0; /* Blanco suave */
+    font-size: 1em;
+    margin-top: 5px;
 }
 
 .clients-winning {
-    background-color: #e0f7fa;
-    border-radius: 30px;
-    padding: 12px 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
-    color: #00796b;
-    font-size: 15px;
-    font-weight: bold;
+    align-items: center;
+    background-color: #2d383f; /* Mismo gris-verdoso */
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid #4a5d6a;
 }
 
 .people-icon {
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    margin-right: 12px;
+    filter: invert(0.8); /* Ajustar el color del ícono si es claro */
 }
 
-/* Trustpilot Section - ESTILOS ACTUALIZADOS PARA PARECERSE MÁS A LA FOTO */
+.clients-winning p {
+    margin: 0;
+    font-weight: bold;
+    color: #79e0a8; /* Un verde claro para el texto, destacando */
+    font-size: 1.2em;
+}
+
 .trustpilot-section {
-    background-color: #e6f7f3; /* Fondo verde claro */
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column; /* Apila elementos verticalmente */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil */
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #2d383f; /* Mismo gris-verdoso */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid #4a5d6a;
 }
 
 .excellent-text {
-    color: #333333;
-    font-size: 16px;
+    font-size: 1.3em;
     font-weight: bold;
-    margin-bottom: 8px; /* Espacio entre "Excelente" y la calificación */
+    color: #128c7e; /* Verde azulado para "Excelente" */
+    margin-bottom: 12px;
 }
 
 .trustpilot-rating {
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    color: #666666;
-    font-size: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .trustpilot-rating .stars {
-    color: #00b67a; /* Color verde de las estrellas de Trustpilot */
-    margin-right: 8px;
-    font-size: 18px; /* Estrellas ligeramente más grandes */
-    white-space: nowrap; /* Mantiene las estrellas en una sola línea */
+    color: #128c7e; /* Verde azulado para las estrellas */
+    font-size: 1.4em;
 }
 
-.trustpilot-rating .rating-value {
+.trustpilot-rating .stars i {
+    margin: 0 2px;
+}
+
+.rating-value {
     font-weight: bold;
-    color: #333333;
-    margin-right: 8px;
-    white-space: nowrap; /* Mantiene el valor de la calificación en una sola línea */
+    color: #c0c0c0; /* Gris claro */
+    margin-left: 8px;
+    font-size: 1.1em;
 }
 
-.trustpilot-rating .trustpilot-logo {
-    width: 90px; /* Ajusta el tamaño para que coincida con la imagen */
+.trustpilot-logo {
+    width: 110px;
     height: auto;
+    margin-left: 12px;
+    filter: brightness(0.8) invert(0.1); /* Ajuste para que el logo se vea bien en fondo oscuro */
 }
 
-
-/* Notificación de Premios Pagados (inferior izquierda) */
+/* Notificación de premio pagado */
 .paid-prizes-notification {
-    position: fixed; /* Posición fija relativa a la ventana */
-    bottom: 20px;
-    left: 20px;
-    background-color: #333333;
-    border-radius: 10px;
-    padding: 10px 15px; /* Padding más pequeño */
+    position: fixed;
+    top: 25px;
+    right: 25px; /* ¡Cambio clave aquí! Posicionado a la derecha */
+    left: auto; /* Desactivar la posición a la izquierda */
+    transform: none; /* Desactivar la transformación de centrado */
+    background-color: #0c0f12; /* Un gris muy oscuro, casi negro */
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6); /* Sombra muy oscura */
+    z-index: 1000;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    text-align: left;
-    max-width: 280px; /* Ancho máximo */
-    color: #ffffff;
-    font-size: 14px; /* Tamaño de fuente más pequeño */
-    opacity: 0; /* Inicialmente oculto */
-    visibility: hidden; /* Oculto para lectores de pantalla cuando no visible */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Transición suave */
-    z-index: 1001; /* Asegura que esté por encima de otros contenidos */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease; /* Añadir transform a la transición */
+    width: fit-content;
+    max-width: 90%;
+    box-sizing: border-box;
+    border: 1px solid #202d33; /* Borde oscuro */
 }
 
 .paid-prizes-notification.show {
     opacity: 1;
     visibility: visible;
+    transform: translateX(0); /* Asegurar que no haya transformaciones residuales */
 }
 
-.paid-prizes-notification .notification-content {
+.notification-content {
     display: flex;
     align-items: center;
-    width: 100%;
 }
 
-.paid-prizes-notification .profile-picture {
-    width: 40px; /* Imagen de perfil más pequeña */
-    height: 40px;
+.profile-picture {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 12px;
     object-fit: cover;
+    border: 3px solid #25d366; /* Borde del verde de WhatsApp */
 }
 
-.paid-prizes-notification .text-content {
-    flex-grow: 1;
+.notification-content .text-content {
+    text-align: left;
 }
 
-.paid-prizes-notification .name {
-    color: #ffffff;
-    font-weight: bold;
+.notification-content .name {
     margin: 0;
-    font-size: 14px; /* Tamaño de fuente más pequeño */
-}
-
-.paid-prizes-notification .prize {
-    color: #ffd700; /* Color oro para "Premio PAGADOSS$" */
     font-weight: bold;
-    margin: 3px 0; /* Margen reducido */
-    font-size: 15px; /* Ligeramente más grande para énfasis */
+    font-size: 1em;
 }
 
-.paid-prizes-notification .prize .fa-gift {
-    margin-right: 5px;
+.notification-content .prize {
+    margin: 3px 0;
+    color: #25d366; /* Verde de WhatsApp */
+    font-weight: bold;
+    font-size: 0.95em;
 }
 
-.paid-prizes-notification .location {
-    color: #aaaaaa;
-    font-size: 12px; /* Tamaño de fuente más pequeño */
+.notification-content .prize .fas {
+    margin-right: 6px;
+}
+
+.notification-content .location {
     margin: 0;
+    font-size: 0.9em;
+    color: #a0a0a0; /* Gris medio */
 }
 
-/* FIXED FOOTER: "BONO ACTIVO" - NUEVO ESTILO */
+/* Bono activo fijo */
 .active-bonus-fixed {
-    position: fixed; /* Posición fija en la ventana */
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #ff4d4d; /* Fondo rojo */
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 15px 10px; /* Padding dentro de la barra */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra en el borde superior */
-    z-index: 1000; /* Asegura que esté por encima de otros contenidos */
-    box-sizing: border-box; /* Incluye el padding en el ancho */
+    background-color: #128c7e; /* Un verde azulado oscuro, similar a WhatsApp */
+    color: #ffffff; /* Texto blanco puro */
+    padding: 18px 15px;
     text-align: center;
-}
-
-.active-bonus-fixed p {
-    margin: 0; /* Elimina el margen por defecto del párrafo */
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    z-index: 999;
+    box-sizing: border-box;
+    letter-spacing: 0.5px;
 }
 
 .active-bonus-fixed .gift-icon {
-    font-size: 20px;
-    margin-right: 10px;
-    animation: bounce 1s infinite; /* Pequeña animación de rebote */
+    margin-right: 12px;
+    color: #79e0a8; /* Un verde claro para el icono de regalo */
+    font-size: 1.3em;
 }
 
-/* Keyframes para la animación de rebote (opcional) */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
+/* Espacio para que el contenido no quede oculto por los elementos fijos */
+.placeholder-space {
+    height: 25px;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        margin-top: 85px;
+        margin-bottom: 85px;
     }
+
+    .header h1 {
+        font-size: 1.9em;
+    }
+
+    .whatsapp-logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .logo-circle {
+        width: 110px;
+        height: 110px;
+    }
+
+    .deepstore-logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .verification-section h2 {
+        font-size: 1.6em;
+    }
+
+    .subtitle {
+        font-size: 1.1em;
+    }
+
+    .whatsapp-button {
+        font-size: 1.2em;
+        padding: 15px 30px;
+    }
+
+    .clients-winning p {
+        font-size: 1.05em;
+    }
+
+    .trustpilot-rating {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .trustpilot-logo {
+        margin-left: 0;
+    }
+
+    .paid-prizes-notification {
+        top: 15px;
+        right: 15px; /* Ajuste para móviles */
+        left: auto;
+        transform: none;
+        padding: 10px 15px;
+    }
+
+    .profile-picture {
+        width: 38px;
+        height: 38px;
+    }
+
+    .notification-content .name,
+    .notification-content .prize,
+    .notification-content .location {
+        font-size: 0.85em;
+    }
+
+    .active-bonus-fixed {
+        font-size: 1.05em;
+        padding: 15px 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .header h1 {
+        font-size: 1.6em;
+    }
+
+    .check-icon {
+        font-size: 1.3em;
+    }
+
+    .verification-section h2 {
+        font-size: 1.4em;
+    }
+
+    .trustpilot-rating .stars {
+        font-size: 1.2em;
+    }
+
+    .rating-value {
+        font-size: 0.95em;
+    }
+
+    .paid-prizes-notification {
+        top: 10px;
+        right: 10px; /* Ajuste para pantallas aún más pequeñas */
+        left: auto;
+        transform: none;
+        padding: 8px 12px;
+    }
+
+    .profile-picture {
+        width: 32px;
+        height: 32px;
+    }
+
+    .notification-content .name,
+    .notification-content .prize,
+    .notification-content .location {
+        font-size: 0.75em;
+    }
+}
     50% {
         transform: translateY(-5px);
     }
