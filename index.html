@@ -150,14 +150,8 @@
                 console.error("Error al inicializar landing:", e);
                 document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
             } finally {
-                // Animación de aparición del botón después de inicializar
-                const waBtn = document.querySelector('.whatsapp-button');
-                if (waBtn) {
-                    setTimeout(() => { // ESTE ES EL setTimeout PRINCIPAL
-                        waBtn.style.transform = 'scale(1)';
-                        waBtn.style.opacity = '1';
-                    }, 0); // Establecido a 0ms aquí
-                }
+                // ✅ ELIMINADO: Todo el bloque setTimeout que causaba la animación
+                // El botón ahora será visible por defecto si su estilo CSS no lo oculta.
             }
         }
 
@@ -183,7 +177,7 @@
         <div class="connection-message">
             <p>Hace click para contactarte con nuestro equipo vía WhatsApp.</p>
         </div>
-        <a href="#" target="_blank" style="text-decoration: none; opacity: 0; transform: scale(0); transition: all 0.5s ease;" class="whatsapp-button" id="whatsappCtaButton">
+        <a href="#" target="_blank" style="text-decoration: none; transition: all 0.5s ease;" class="whatsapp-button" id="whatsappCtaButton">
             Obtener bono vía WhatsApp <span class="arrow">→</span>
         </a>
         
