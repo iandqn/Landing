@@ -114,56 +114,35 @@
                 // Registrar pageview en Firebase al cargar la página
                 await registrarPageview(); // Esto puede tardar por la red
 
-                const docRef = db.collection('landings').doc(landingId);
-                const docSnap = await docRef.get(); // Esto también puede tardar por la red
-
                 const waBtn = document.querySelector(".whatsapp-button");
+                
+                // ✅ NÚMERO DE WHATSAPP HARDCODEADO
+                const numeroWhatsappHardcoded = "5491137948704"; // <-- Coloca aquí el número de WhatsApp fijo que quieres usar
+                
+                const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:");
 
-                if (!docSnap.exists) {
-                    console.warn(`Landing con ID: ${landingId} no encontrada en Firebase.`);
-                    if (waBtn) waBtn.style.display = "none"; // Ocultar botón si no hay datos
-                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Landing no encontrada.</p>";
-                    return;
-                }
-
-                const data = docSnap.data();
-
-                // Si la landing está marcada como inactiva en Firebase
-                if (data.activo === false) {
-                    if (waBtn) waBtn.style.display = "none";
-                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Esta oferta ya no está disponible.</p>";
-                    return;
-                }
-
-                // Actualizar el href del botón de WhatsApp con el número de Firebase
-                if (waBtn && data.numeroWhatsapp) {
-                    const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:"); // Mensaje predefinido
-                    waBtn.href = `https://wa.me/${data.numeroWhatsapp}?text=${mensaje}`;
+                // Actualizar el href del botón de WhatsApp con el número hardcodeado
+                if (waBtn) {
+                    waBtn.href = `https://wa.me/${numeroWhatsappHardcoded}?text=${mensaje}`;
                     
-                    // ✅ AHORA HACEMOS EL BOTÓN CLICABLE SOLO CUANDO EL HREF ESTÁ LISTO
+                    // ✅ HACEMOS EL BOTÓN VISIBLE Y CLICABLE INMEDIATAMENTE
+                    waBtn.style.opacity = "1"; // Hacemos que sea visible
+                    waBtn.style.transform = "scale(1)"; // Lo escalamos a su tamaño normal
                     waBtn.style.pointerEvents = "auto"; // Hacemos que sea clicable
                     
                     // Asignar la función registrarClick al evento click del botón
                     waBtn.addEventListener('click', registrarClick);
                 } else {
-                    if (waBtn) waBtn.style.display = "none"; // Ocultar si no hay número
+                    // Si el botón no se encuentra, mostrar mensaje de error o ocultar la página
+                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error: Botón de WhatsApp no encontrado.</p>";
+                    return;
                 }
                 
-                // Opcional: Si quieres inicializar un Pixel de Meta diferente por landing,
-                // puedes usar el `data.pixelMetaId` de Firebase aquí.
-                // if (data.pixelMetaId && typeof fbq === 'function') {
-                //   fbq('init', data.pixelMetaId);
-                //   fbq('track', 'PageView'); // PageView con el nuevo ID dinámico
-                // } 
-
             } catch (e) {
                 console.error("Error al inicializar landing:", e);
                 document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
             }
-            // ✅ ELIMINADO EL setTimeout Y CONFIAMOS EN LA LÓGICA DE ARRIBA PARA HACERLO VISIBLE
-            // El botón ahora será visible por defecto si su estilo CSS no lo oculta.
-            // Si el botón ya tiene opacity:0 y transform:scale(0) iniciales, estos se resolverán al cargar el HTML.
-            // Aquí no hacemos nada más, ya que la visibilidad inicial la controla el HTML y la clicabilidad está arriba.
+            // Eliminamos la lógica de setTimeout aquí, ya no es necesaria
         }
 
         // Ejecutar la inicialización cuando el DOM esté completamente cargado
