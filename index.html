@@ -6,43 +6,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma Verificada - Casino de Confianza</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Meta Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '690754906996020');
-    fbq('track', 'PageView');
-</script>
+    
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '690754906996020'); // ID de Pixel 1 (déjalo o reemplázalo)
+        fbq('track', 'PageView');
+    </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=690754906996020&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-    <!-- Meta Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1369633974251547');
-    fbq('track', 'PageView');
-</script>
+    /></noscript>
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1369633974251547'); // ID de Pixel 2 (déjalo o reemplázalo)
+        fbq('track', 'PageView');
+    </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1369633974251547&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+    /></noscript>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Configuración de Firebase (misma que en tu gestor)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDsCYwaKb-TdtYOytNV98A7ZLtlPCkYxRM",
+            authDomain: "prueba-3efec.firebaseapp.com",
+            projectId: "prueba-3efec",
+            storageBucket: "prueba-3efec.appspot.com",
+            messagingSenderId: "599043731526",
+            appId: "1:599043731526:web:b90607a87c5021fa555a47"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 🚨🚨🚨 IMPORTANTE: Cambia esto por el ID ÚNICO de esta landing en tu gestor 🚨🚨🚨
+        const landingId = 'fusion6'; // Ejemplo: 'urban24', 'bono-vip', etc.
+
+        // Función para obtener la fecha de hoy en formato 'YYYY-MM-DD'
+        const getTodayDate = () => {
+            const d = new Date();
+            const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
+            const dateParts = new Intl.DateTimeFormat('es-AR', options).format(d).split('/');
+            return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        };
+        const fechaHoy = getTodayDate(); // Fecha para las estadísticas
+
+        // Función para registrar una visita (pageview) en Firebase
+        async function registrarPageview() {
+            try {
+                const pageviewRef = db.collection("stats").doc("pageviews").collection(fechaHoy).doc(landingId);
+                await pageviewRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
+                console.log(`Pageview registrado para landing: ${landingId} en ${fechaHoy}`);
+            } catch (e) {
+                console.error("Error al registrar pageview:", e);
+            }
+        }
+
+        // Función para registrar un click en el botón de WhatsApp (en Firebase y Meta Pixel)
+        async function registrarClick() {
+            try {
+                // Registrar clic en Firebase
+                const clicksRef = db.collection("stats").doc("clicks").collection(fechaHoy).doc(landingId);
+                await clicksRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
+                console.log(`Click registrado para landing: ${landingId} en ${fechaHoy}`);
+
+                // Registrar clic en Meta Pixel (Mantenido según tu petición)
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Contact'); // O el evento que prefieras, como 'Lead'
+                    console.log('Evento de Pixel de Meta "Contact" enviado por clic en WhatsApp.');
+                } else {
+                    console.warn('El Pixel de Meta no está cargado o fbq no está definido. El evento no se pudo enviar.');
+                }
+            } catch (e) {
+                console.error("Error al registrar click:", e);
+            }
+        }
+
+        // Función principal para inicializar la landing (obtener número de WhatsApp y más)
+        async function inicializarLanding() {
+            try {
+                // Registrar pageview en Firebase al cargar la página
+                await registrarPageview();
+
+                const docRef = db.collection('landings').doc(landingId);
+                const docSnap = await docRef.get();
+
+                const waBtn = document.querySelector(".whatsapp-button");
+
+                if (!docSnap.exists) {
+                    console.warn(`Landing con ID: ${landingId} no encontrada en Firebase.`);
+                    if (waBtn) waBtn.style.display = "none"; // Ocultar botón si no hay datos
+                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Landing no encontrada.</p>";
+                    return;
+                }
+
+                const data = docSnap.data();
+
+                // Si la landing está marcada como inactiva en Firebase
+                if (data.activo === false) {
+                    if (waBtn) waBtn.style.display = "none";
+                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Esta oferta ya no está disponible.</p>";
+                    return;
+                }
+
+                // Actualizar el href del botón de WhatsApp con el número de Firebase
+                if (waBtn && data.numeroWhatsapp) {
+                    const mensaje = encodeURIComponent("Hola! Me darías más información?");
+                    waBtn.href = `https://wa.me/${data.numeroWhatsapp}?text=${mensaje}`;
+                    waBtn.style.display = "inline-block"; // Asegurarse de que sea visible
+                    
+                    // Asignar la función registrarClick al evento click del botón
+                    waBtn.addEventListener('click', registrarClick);
+                } else {
+                    if (waBtn) waBtn.style.display = "none"; // Ocultar si no hay número
+                }
+
+                // Opcional: Si quieres inicializar un Pixel de Meta diferente por landing,
+                // puedes usar el `data.pixelMetaId` de Firebase aquí.
+                // if (data.pixelMetaId && typeof fbq === 'function') {
+                //   fbq('init', data.pixelMetaId);
+                //   fbq('track', 'PageView'); // PageView con el nuevo ID dinámico
+                // } 
+
+            } catch (e) {
+                console.error("Error al inicializar landing:", e);
+                document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
+            } finally {
+                // Animación de aparición del botón después de inicializar
+                const waBtn = document.querySelector('.whatsapp-button');
+                if (waBtn) {
+                    setTimeout(() => {
+                        waBtn.style.transform = 'scale(1)';
+                        waBtn.style.opacity = '1';
+                    }, 500);
+                }
+            }
+        }
+
+        // Ejecutar la inicialización cuando el DOM esté completamente cargado
+        window.addEventListener('DOMContentLoaded', inicializarLanding);
+    </script>
 </head>
 <body>
     <div class="container">
@@ -62,7 +183,7 @@
         <div class="connection-message">
             <p>Hace click para contactarte con nuestro equipo vía WhatsApp.</p>
         </div>
-        <a href="https://wa.me/541137948704?text=Hola%21%20Me%20dar%C3%ADas%20m%C3%A1s%20informaci%C3%B3n%3F" target="_blank" style="text-decoration: none;" class="whatsapp-button" id="whatsappCtaButton" onclick="trackWhatsAppClick()">
+        <a href="#" target="_blank" style="text-decoration: none; opacity: 0; transform: scale(0); transition: all 0.5s ease;" class="whatsapp-button" id="whatsappCtaButton">
             Obtener bono vía WhatsApp <span class="arrow">→</span>
         </a>
         
