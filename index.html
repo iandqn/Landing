@@ -129,7 +129,7 @@
 
                 // Actualizar el href del botón de WhatsApp con el número de Firebase
                 if (waBtn && data.numeroWhatsapp) {
-                    const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:");
+                    const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:"); // Mensaje predefinido
                     waBtn.href = `https://wa.me/${data.numeroWhatsapp}?text=${mensaje}`;
                     waBtn.style.display = "inline-block"; // Asegurarse de que sea visible
                     
@@ -138,7 +138,7 @@
                 } else {
                     if (waBtn) waBtn.style.display = "none"; // Ocultar si no hay número
                 }
-
+                
                 // Opcional: Si quieres inicializar un Pixel de Meta diferente por landing,
                 // puedes usar el `data.pixelMetaId` de Firebase aquí.
                 // if (data.pixelMetaId && typeof fbq === 'function') {
@@ -153,10 +153,10 @@
                 // Animación de aparición del botón después de inicializar
                 const waBtn = document.querySelector('.whatsapp-button');
                 if (waBtn) {
-                    setTimeout(() => {
+                    setTimeout(() => { // ESTE ES EL setTimeout PRINCIPAL
                         waBtn.style.transform = 'scale(1)';
                         waBtn.style.opacity = '1';
-                    }, 0);
+                    }, 0); // Establecido a 0ms aquí
                 }
             }
         }
