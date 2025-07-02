@@ -129,7 +129,7 @@
 
                 // Actualizar el href del botón de WhatsApp con el número de Firebase
                 if (waBtn && data.numeroWhatsapp) {
-                    const mensaje = encodeURIComponent("Hola! Me darías más información?");
+                    const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:");
                     waBtn.href = `https://wa.me/${data.numeroWhatsapp}?text=${mensaje}`;
                     waBtn.style.display = "inline-block"; // Asegurarse de que sea visible
                     
@@ -156,7 +156,7 @@
                     setTimeout(() => {
                         waBtn.style.transform = 'scale(1)';
                         waBtn.style.opacity = '1';
-                    }, 500);
+                    }, 50);
                 }
             }
         }
