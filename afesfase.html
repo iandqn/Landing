@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="facebook-domain-verification" content="w7zf48bzjoq8satoemu9gpb3u5d7xy" />
+    <meta name="description" content="Plataforma verificada. Conéctate con nuestro equipo de soporte vía WhatsApp y solicita tu bono activo.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Verificada - Casino de Confianza</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '690754906996020'); // ID de Pixel 1 (déjalo o reemplázalo)
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=690754906996020&ev=PageView&noscript=1"
+    /></noscript>
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1369633974251547'); // ID de Pixel 2 (déjalo o reemplázalo)
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1369633974251547&ev=PageView&noscript=1"
+    /></noscript>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Configuración de Firebase (misma que en tu gestor)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDsCYwaKb-TdtYOytNV98A7ZLtlPCkYxRM",
+            authDomain: "prueba-3efec.firebaseapp.com",
+            projectId: "prueba-3efec",
+            storageBucket: "prueba-3efec.appspot.com",
+            messagingSenderId: "599043731526",
+            appId: "1:599043731526:web:b90607a87c5021fa555a47"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 🚨🚨🚨 IMPORTANTE: Cambia esto por el ID ÚNICO de esta landing en tu gestor 🚨🚨🚨
+        const landingId = 'fusion6'; // Ejemplo: 'urban24', 'bono-vip', etc.
+
+        // Función para obtener la fecha de hoy en formato 'YYYY-MM-DD'
+        const getTodayDate = () => {
+            const d = new Date();
+            const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
+            const dateParts = new Intl.DateTimeFormat('es-AR', options).format(d).split('/');
+            return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        };
+        const fechaHoy = getTodayDate(); // Fecha para las estadísticas
+
+        // Función para registrar una visita (pageview) en Firebase
+        async function registrarPageview() {
+            try {
+                const pageviewRef = db.collection("stats").doc("pageviews").collection(fechaHoy).doc(landingId);
+                await pageviewRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
+                console.log(`Pageview registrado para landing: ${landingId} en ${fechaHoy}`);
+            } catch (e) {
+                console.error("Error al registrar pageview:", e);
+            }
+        }
+
+        // Función para registrar un click en el botón de WhatsApp (en Firebase y Meta Pixel)
+        async function registrarClick(event) { // <-- Añadimos 'event' como parámetro
+            event.preventDefault(); // <-- ¡ESTO ES CLAVE! Previene la navegación por defecto del enlace
+            
+            try {
+                // Registrar clic en Firebase
+                const clicksRef = db.collection("stats").doc("clicks").collection(fechaHoy).doc(landingId);
+                await clicksRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
+                console.log(`Click registrado para landing: ${landingId} en ${fechaHoy}`);
+
+                // Registrar clic en Meta Pixel (Mantenido según tu petición)
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Contact'); // O el evento que prefieras, como 'Lead'
+                    console.log('Evento de Pixel de Meta "Contact" enviado por clic en WhatsApp.');
+                } else {
+                    console.warn('El Pixel de Meta no está cargado o fbq no está definido. El evento no se pudo enviar.');
+                }
+            } catch (e) {
+                console.error("Error al registrar click:", e);
+            } finally {
+                // Después de registrar el click, navegamos manualmente al enlace de WhatsApp
+                const waBtn = document.getElementById('whatsappCtaButton');
+                if (waBtn && waBtn.href && waBtn.href !== '#') {
+                    window.open(waBtn.href, '_blank'); // Abre el enlace en una nueva pestaña
+                }
+            }
+        }
+
+        // Función principal para inicializar la landing (obtener número de WhatsApp y más)
+        async function inicializarLanding() {
+            try {
+                // Registrar pageview en Firebase al cargar la página
+                await registrarPageview(); // Esto puede tardar por la red
+
+                const waBtn = document.querySelector(".whatsapp-button");
+                
+                // ✅ NÚMERO DE WHATSAPP HARDCODEADO
+                const numeroWhatsappHardcoded = "5491137948704"; // <-- Coloca aquí el número de WhatsApp fijo que quieres usar
+                
+                const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:");
+
+                // Actualizar el href del botón de WhatsApp con el número hardcodeado
+                if (waBtn) {
+                    waBtn.href = `https://wa.me/${numeroWhatsappHardcoded}?text=${mensaje}`;
+                    
+                    // ✅ HACEMOS EL BOTÓN VISIBLE Y CLICABLE INMEDIATAMENTE
+                    waBtn.style.opacity = "1"; // Hacemos que sea visible
+                    waBtn.style.transform = "scale(1)"; // Lo escalamos a su tamaño normal
+                    waBtn.style.pointerEvents = "auto"; // Hacemos que sea clicable
+                    
+                    // Asignar la función registrarClick al evento click del botón
+                    waBtn.addEventListener('click', registrarClick);
+                } else {
+                    // Si el botón no se encuentra, mostrar mensaje de error o ocultar la página
+                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error: Botón de WhatsApp no encontrado.</p>";
+                    return;
+                }
+                
+            } catch (e) {
+                console.error("Error al inicializar landing:", e);
+                document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
+            }
+            // Eliminamos la lógica de setTimeout aquí, ya no es necesaria
+        }
+
+        // Ejecutar la inicialización cuando el DOM esté completamente cargado
+        window.addEventListener('DOMContentLoaded', inicializarLanding);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="whatsapp-logo.png" alt="WhatsApp Logo" class="whatsapp-logo">
+            <h1>WhatsApp</h1>
+        </div>
+        <div class="logo-circle">
+            <img src="deepstore-logo.png" alt="Deep Store Logo" class="deepstore-logo">
+        </div>
+        <div class="verification-section">
+            <span class="check-icon"><i class="fas fa-check-square"></i></span>
+            <h2>Plataforma Verificada</h2>
+            <span class="check-icon"><i class="fas fa-check-square"></i></span>
+        </div>
+        <p class="subtitle">Casino de Confianza</p>
+        <div class="connection-message">
+            <p>Hace click para contactarte con nuestro equipo vía WhatsApp.</p>
+        </div>
+        <a href="#" target="_blank" 
+           style="text-decoration: none; opacity: 1; transform: scale(1); transition: all 0.5s ease; pointer-events: none;" 
+           class="whatsapp-button" id="whatsappCtaButton">
+            Obtener bono vía WhatsApp <span class="arrow">→</span>
+        </a>
+        
+      <div class="small-testimonials-section">
+            <div class="testimonial-card" id="rotatingTestimonial">
+                <p id="testimonialText"></p>
+                <span class="testimonial-author" id="testimonialAuthor"></span>
+            </div>
+        </div>
+        
+        <div class="clients-winning">
+            <img src="people-icon.png" alt="People Icon" class="people-icon">
+            <p>+10.000 CLIENTES GANANDO todos los días</p>
+        </div>
+        
+        <div class="trustpilot-section">
+            <p class="excellent-text">"Excelente"</p>
+            <div class="trustpilot-rating">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="rating-value">Calificación 4.9/5</span>
+                <img src="trustpilot-logo.png" alt="Trustpilot Logo" class="trustpilot-logo">
+            </div>
+        </div>
+
+        <div class="placeholder-space"></div>
+    </div>
+
+    <div class="paid-prizes-notification" id="paidPrizeNotification">
+        <div class="notification-content">
+            <img src="profile-picture.png" alt="Profile Picture" class="profile-picture" id="notificationProfilePic">
+            <div class="text-content">
+                <p class="name" id="notificationName"></p>
+                <p class="prize" id="notificationPrize"><i class="fas fa-gift"></i> Premio PAGADO</p>
+                <p class="location" id="notificationLocation"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="active-bonus-fixed">
+        <p><span class="gift-icon"><i class="fas fa-gift"></i></span> BONO ACTIVO - ¡Solicítalo ahora por WhatsApp!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
