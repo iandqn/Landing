@@ -81,7 +81,9 @@
         }
 
         // Función para registrar un click en el botón de WhatsApp (en Firebase y Meta Pixel)
-        async function registrarClick() {
+        async function registrarClick(event) { // <-- Añadimos 'event' como parámetro
+            event.preventDefault(); // <-- ¡ESTO ES CLAVE! Previene la navegación por defecto del enlace
+            
             try {
                 // Registrar clic en Firebase
                 const clicksRef = db.collection("stats").doc("clicks").collection(fechaHoy).doc(landingId);
@@ -97,6 +99,12 @@
                 }
             } catch (e) {
                 console.error("Error al registrar click:", e);
+            } finally {
+                // Después de registrar el click, navegamos manualmente al enlace de WhatsApp
+                const waBtn = document.getElementById('whatsappCtaButton');
+                if (waBtn && waBtn.href && waBtn.href !== '#') {
+                    window.open(waBtn.href, '_blank'); // Abre el enlace en una nueva pestaña
+                }
             }
         }
 
@@ -131,7 +139,11 @@
                 if (waBtn && data.numeroWhatsapp) {
                     const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:"); // Mensaje predefinido
                     waBtn.href = `https://wa.me/${data.numeroWhatsapp}?text=${mensaje}`;
-                    waBtn.style.display = "inline-block"; // Asegurarse de que sea visible
+                    // ✅ Aseguramos que el botón sea visible y clicable una vez que el HREf está listo
+                    waBtn.style.display = "inline-block"; 
+                    waBtn.style.opacity = "1"; // Hacemos que sea visible
+                    waBtn.style.transform = "scale(1)"; // Lo escalamos a su tamaño normal
+                    waBtn.style.pointerEvents = "auto"; // Hacemos que sea clicable
                     
                     // Asignar la función registrarClick al evento click del botón
                     waBtn.addEventListener('click', registrarClick);
@@ -150,8 +162,7 @@
                 console.error("Error al inicializar landing:", e);
                 document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
             } finally {
-                // ✅ ELIMINADO: Todo el bloque setTimeout que causaba la animación
-                // El botón ahora será visible por defecto si su estilo CSS no lo oculta.
+                // ✅ ELIMINADO EL setTimeout Y CONFIAMOS EN LA LÓGICA DE ARRIBA PARA HACERLO VISIBLE
             }
         }
 
@@ -177,7 +188,9 @@
         <div class="connection-message">
             <p>Hace click para contactarte con nuestro equipo vía WhatsApp.</p>
         </div>
-        <a href="#" target="_blank" style="text-decoration: none; transition: all 0.5s ease;" class="whatsapp-button" id="whatsappCtaButton">
+        <a href="#" target="_blank" 
+           style="text-decoration: none; opacity: 0; transform: scale(0); transition: all 0.5s ease; pointer-events: none;" 
+           class="whatsapp-button" id="whatsappCtaButton">
             Obtener bono vía WhatsApp <span class="arrow">→</span>
         </a>
         
@@ -190,7 +203,7 @@
         
         <div class="clients-winning">
             <img src="people-icon.png" alt="People Icon" class="people-icon">
-            <p>+10.000 CLIENTES GANANDO todos los días</p>
+            p>+10.000 CLIENTES GANANDO todos los días</p>
         </div>
         
         <div class="trustpilot-section">
@@ -226,6 +239,9 @@
         <p><span class="gift-icon"><i class="fas fa-gift"></i></span> BONO ACTIVO - ¡Solicítalo ahora por WhatsApp!</p>
     </div>
 
+    <script src="script.js"></script>
+</body>
+</html>
     <script src="script.js"></script>
 </body>
 </html>
