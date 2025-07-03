@@ -44,7 +44,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Configuración de Firebase (misma que en tu gestor)
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDsCYwaKb-TdtYOytNV98A7ZLtlPCkYxRM",
             authDomain: "prueba-3efec.firebaseapp.com",
@@ -57,95 +57,63 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 🚨🚨🚨 IMPORTANTE: Cambia esto por el ID ÚNICO de esta landing en tu gestor 🚨🚨🚨
-        const landingId = 'fusion6'; // Ejemplo: 'urban24', 'bono-vip', etc.
+        // 🚨 IMPORTANTE: Cambia esto por el ID ÚNICO de esta landing en tu gestor 🚨
+        const landingId = 'fusion6';
 
-        // Función para obtener la fecha de hoy en formato 'YYYY-MM-DD'
         const getTodayDate = () => {
             const d = new Date();
             const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit' };
             const dateParts = new Intl.DateTimeFormat('es-AR', options).format(d).split('/');
             return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
         };
-        const fechaHoy = getTodayDate(); // Fecha para las estadísticas
+        const fechaHoy = getTodayDate();
 
         // Función para registrar una visita (pageview) en Firebase
         async function registrarPageview() {
             try {
                 const pageviewRef = db.collection("stats").doc("pageviews").collection(fechaHoy).doc(landingId);
                 await pageviewRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
-                console.log(`Pageview registrado para landing: ${landingId} en ${fechaHoy}`);
             } catch (e) {
                 console.error("Error al registrar pageview:", e);
             }
         }
 
-        // Función para registrar un click en el botón de WhatsApp (en Firebase y Meta Pixel)
-        async function registrarClick(event) { // <-- Añadimos 'event' como parámetro
-            event.preventDefault(); // <-- ¡ESTO ES CLAVE! Previene la navegación por defecto del enlace
+        // Función para registrar un click en el botón de WhatsApp
+        async function registrarClick(event) {
+            event.preventDefault(); // Previene la navegación inmediata
             
             try {
                 // Registrar clic en Firebase
                 const clicksRef = db.collection("stats").doc("clicks").collection(fechaHoy).doc(landingId);
                 await clicksRef.set({ count: firebase.firestore.FieldValue.increment(1) }, { merge: true });
-                console.log(`Click registrado para landing: ${landingId} en ${fechaHoy}`);
 
-                // Registrar clic en Meta Pixel (Mantenido según tu petición)
+                // Registrar clic en Meta Pixel
                 if (typeof fbq === 'function') {
-                    fbq('track', 'Contact'); // O el evento que prefieras, como 'Lead'
-                    console.log('Evento de Pixel de Meta "Contact" enviado por clic en WhatsApp.');
-                } else {
-                    console.warn('El Pixel de Meta no está cargado o fbq no está definido. El evento no se pudo enviar.');
+                    fbq('track', 'Contact');
                 }
             } catch (e) {
                 console.error("Error al registrar click:", e);
             } finally {
-                // Después de registrar el click, navegamos manualmente al enlace de WhatsApp
+                // Después de registrar, navegamos al enlace de WhatsApp
                 const waBtn = document.getElementById('whatsappCtaButton');
                 if (waBtn && waBtn.href && waBtn.href !== '#') {
-                    window.open(waBtn.href, '_blank'); // Abre el enlace en una nueva pestaña
+                    window.open(waBtn.href, '_blank');
                 }
             }
         }
 
-        // Función principal para inicializar la landing (obtener número de WhatsApp y más)
+        // Función principal para inicializar la landing
         async function inicializarLanding() {
             try {
                 // Registrar pageview en Firebase al cargar la página
-                await registrarPageview(); // Esto puede tardar por la red
-
-                const waBtn = document.querySelector(".whatsapp-button");
-                
-                // ✅ NÚMERO DE WHATSAPP HARDCODEADO
-                const numeroWhatsappHardcoded = "5491137954266"; // <-- Coloca aquí el número de WhatsApp fijo que quieres usar
-                
-                const mensaje = encodeURIComponent("Hola! Me darías más información? Mi nombre es:");
-
-                // Actualizar el href del botón de WhatsApp con el número hardcodeado
-                if (waBtn) {
-                    waBtn.href = `https://wa.me/${numeroWhatsappHardcoded}?text=${mensaje}`;
-                    
-                    // ✅ HACEMOS EL BOTÓN VISIBLE Y CLICABLE INMEDIATAMENTE
-                    waBtn.style.opacity = "1"; // Hacemos que sea visible
-                    waBtn.style.transform = "scale(1)"; // Lo escalamos a su tamaño normal
-                    waBtn.style.pointerEvents = "auto"; // Hacemos que sea clicable
-                    
-                    // Asignar la función registrarClick al evento click del botón
-                    waBtn.addEventListener('click', registrarClick);
-                } else {
-                    // Si el botón no se encuentra, mostrar mensaje de error o ocultar la página
-                    document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error: Botón de WhatsApp no encontrado.</p>";
-                    return;
-                }
-                
+                await registrarPageview();
+                // Ya no necesitamos modificar el botón aquí, se hace directamente en el HTML
             } catch (e) {
                 console.error("Error al inicializar landing:", e);
                 document.body.innerHTML = "<p style='padding:2rem;text-align:center;color:white;'>Error al cargar la oferta.</p>";
             }
-            // Eliminamos la lógica de setTimeout aquí, ya no es necesaria
         }
 
-        // Ejecutar la inicialización cuando el DOM esté completamente cargado
         window.addEventListener('DOMContentLoaded', inicializarLanding);
     </script>
 </head>
@@ -167,9 +135,12 @@
         <div class="connection-message">
             <p>Hace click para contactarte con nuestro equipo vía WhatsApp.</p>
         </div>
-        <a href="#" target="_blank" 
-           style="text-decoration: none; opacity: 1; transform: scale(1); transition: all 0.5s ease; pointer-events: none;" 
-           class="whatsapp-button" id="whatsappCtaButton">
+        
+        <a href="https://wa.me/5491137954266?text=Hola!%20Me%20dar%C3%ADas%20m%C3%A1s%20informaci%C3%B3n%3F%20Mi%20nombre%20es%3A" 
+           target="_blank" 
+           class="whatsapp-button" 
+           id="whatsappCtaButton"
+           onclick="registrarClick(event)">
             Obtener bono vía WhatsApp <span class="arrow">→</span>
         </a>
         
